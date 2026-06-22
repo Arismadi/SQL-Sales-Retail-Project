@@ -314,6 +314,7 @@ LIMIT 5;
 ###  2. Product and Discount Impact Analysis
 ``purpose `` : to understand product and discount perfomance 
 #### a) Top Product by Revenue 
+``Business Question`` : Which products generate the highest revenue contribution?
 ```sql
 SELECT
   product_name,
@@ -326,8 +327,10 @@ GROUP BY
 ORDER BY total_sales DESC 
 LIMIT 10;
 ```
+``insight`` : Bread from the Groceries category generated the highest revenue contribution among all products, followed closely by Lipstick from the Beauty category. This indicates that both daily essential products and personal care items showed strong customer deman and sales perfomances. 
 
 #### b) Top Product by Quantity Sales 
+``Business Question`` : Which products has the most quantity sold in dataset?
 ```sql
 SELECT 	
 	product_name, 
@@ -340,6 +343,8 @@ GROUP BY
 ORDER BY total_quantity DESC 
 LIMIT 10;
 ```
+``Insight``: Dumbbells in the Sports category have the highest sales volume compared to other products. Lamps in the Home category are the second best selling products, followed by puzzles in the Toys category.
+This indicates that consumers tend to purchase everyday items in larger quantities than other products.
 #### c) Discount Impact Analysis
 ```sql
 SELECT 
@@ -374,3 +379,87 @@ GROUP BY 1
 ORDER BY total_sales DESC
 LIMIT 5;
 ```
+
+### 3. Customer Analysis 
+``purpose`` : to get understanding about customer behavior
+#### a) Gender Analysis 
+```sql
+SELECT 
+	customer_gender, 
+	COUNT(DISTINCT(customer_id)) AS total_customers, 
+	SUM(net_sales) AS total_sales, 
+	ROUND(AVG(net_sales),2) AS avg_spending
+FROM retailsales.vw_retail_sales 
+GROUP BY customer_gender
+ORDER BY total_sales DESC;
+```
+#### b) Age Segment Analysis 
+```sql
+SELECT
+	customer_age_segment,
+	COUNT(DISTINCT customer_id) AS total_customers,
+	SUM(net_sales) AS total_sales,
+	ROUND(AVG(net_sales),2) AS avg_spending
+FROM retailsales.vw_retail_sales
+GROUP BY customer_age_segment
+ORDER BY total_sales DESC;
+```
+##### c) Customer Segment Analysis 
+```sql
+SELECT 
+	customer_segment, 
+	COUNT(DISTINCT customer_id) AS total_customers, 
+	SUM(net_sales) AS total_sales, 
+	ROUND(AVG(net_sales),2) AS avg_spending
+FROM retailsales.vw_retail_sales
+GROUP BY customer_segment 
+ORDER BY total_sales DESC;
+```
+#### d) Spending Behavior
+```sql
+SELECT 
+	sales_size, 
+	COUNT(*) AS transaction_id, 
+	SUM(net_sales) AS total_sales
+FROM retailsales.vw_retail_sales
+GROUP BY sales_size
+ORDER BY total_sales DESC;
+```
+
+### 4. Regional, Channel, and Payment Method
+``purpose`` : to understanding Region and channel perfomance 
+#### a) Regional Perfomance 
+```sql
+SELECT 
+	region, 
+	COUNT(DISTINCT transaction_id) AS total_orders, 
+	ROUND(AVG(net_sales),2) AS avg_sales, 
+	SUM(net_sales) AS total_sales
+FROM retailsales.vw_retail_sales 
+GROUP BY region 
+ORDER BY total_sales DESC;
+```
+#### b) Sales Channel Analysis 
+```sql
+SELECT 
+	sales_channel, 
+	COUNT(DISTINCT transaction_id) AS total_orders, 
+	ROUND(AVG(net_sales),2) AS avg_sales,
+	SUM(net_sales) AS total_sales
+FROM retailsales.vw_retail_sales 
+GROUP BY sales_channel 
+ORDER BY total_sales DESC;
+```
+#### c) Payment Method Analysis 
+```sql
+SELECT 
+	payment_method, 
+	COUNT(DISTINCT transaction_id) AS total_orders, 
+	ROUND(AVG(net_sales),2) AS avg_sales, 
+	SUM(net_sales) AS total_sales
+FROM retailsales.vw_retail_sales
+GROUP BY payment_method
+ORDER BY total_sales DESC;
+```
+
+
