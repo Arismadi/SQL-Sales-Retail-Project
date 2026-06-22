@@ -345,7 +345,9 @@ LIMIT 10;
 ```
 ``Insight``: Dumbbells in the Sports category have the highest sales volume compared to other products. Lamps in the Home category are the second best selling products, followed by puzzles in the Toys category.
 This indicates that consumers tend to purchase everyday items in larger quantities than other products.
+
 #### c) Discount Impact Analysis
+``Business Question`` : Which discount category generates the highest revenue and transaction volume from dataset?
 ```sql
 SELECT 
 	discount_category, 
@@ -356,7 +358,10 @@ FROM retailsales.vw_retail_sales
 GROUP BY discount_category
 ORDER BY total_sales DESC;
 ```
+``Insight`` : Product without discount generated the highest transaction volume, total revenue, and average sales value compared to other discount categories. Revenue and average sales consistenly decreased as discount levels increased. This indicating that higher discount did not necessarily lead to stronger sales perfomance. 
+
 #### d) Basket Analysis 
+``Business Question`` : Which basket size category contributes the highest transactions and revenue?
 ```sql
 SELECT 
 	basket_size, 
@@ -367,7 +372,10 @@ FROM retailsales.vw_retail_sales
 GROUP BY basket_size
 ORDER BY total_sales DESC;
 ```
+``Insight`` : Small basket generated the highest transaction volume and total revenue, indicating that most customers tent to purchase a smaller number of items per transaction. However, this category recorded the lowest average sales value compared to other basket size. Meanwhile, Large Basket contributed the lowest transaction volume and total revenue but achieved the highest average sales value, sugggesting that customers purchasing more items tend to spend significantly more per transaction. 
+
 #### e) Top Product Category 
+``Business Question`` : Which category product that generated highest revenue andtotal orders?
 ```sql
 SELECT 
 	category, 
@@ -379,6 +387,7 @@ GROUP BY 1
 ORDER BY total_sales DESC
 LIMIT 5;
 ```
+``Insight`` : Beauty products generated the highest total revenue, while Sports recorded the highest number of orders among all product categories. In addition, Beauty and Books categories achieved the highest revenue and average sales value, indicating stronger customer spending more per transaction compared to other categories.
 
 ### 3. Customer Analysis 
 ``purpose`` : to get understanding about customer behavior
