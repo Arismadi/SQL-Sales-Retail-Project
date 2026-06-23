@@ -392,6 +392,7 @@ LIMIT 5;
 ### 3. Customer Analysis 
 ``purpose`` : to get understanding about customer behavior
 #### a) Gender Analysis 
+``Business Question`` : Which gender generated highest volume transaction and revenue, so company can focus its effort on that?
 ```sql
 SELECT 
 	customer_gender, 
@@ -402,7 +403,10 @@ FROM retailsales.vw_retail_sales
 GROUP BY customer_gender
 ORDER BY total_sales DESC;
 ```
+``Insight``: Female customers generated the highest total sales and transaction volume among all gender groups. However, male customers recorded the highest average spending value, suggesting that female customers tend to make more frequent purchases with lower transaction value, while male customers spend slightly more per transaction. Meanwhiule, the 'other' gender category showed sales and spending patterns that were relatively similar to both male and female customers, indicating a balanced purchasing behavior across all gender groups. 
+
 #### b) Age Segment Analysis 
+``Business Question`` : Which customer age segment contributes the highest revenue and volume transaction for company?
 ```sql
 SELECT
 	customer_age_segment,
@@ -413,7 +417,10 @@ FROM retailsales.vw_retail_sales
 GROUP BY customer_age_segment
 ORDER BY total_sales DESC;
 ```
+``Insight:`` : Senior segment generated the highest total revenue and transaction volume among all age segments, indicating that this group represent the most active customer segment in the dataset. Although the Adult segment recorded the highest average spending value, the difference in spending across age group was relatively small. This suggests that the stronger sales contribution from Senior customer was primarly driven by higher purchasing frequency rather than significantly larger transaction value. 
+
 ##### c) Customer Segment Analysis 
+``Business Question`` : Which customer segmnet contributes the highest sales perfomance and spending behavior?
 ```sql
 SELECT 
 	customer_segment, 
@@ -424,16 +431,20 @@ FROM retailsales.vw_retail_sales
 GROUP BY customer_segment 
 ORDER BY total_sales DESC;
 ```
+``Insight`` : Loyal customers generated the highest toal revenue and average spending value among all customers segments, indicating stronger purchasing consistency and highers transaction value compared to other groups.However, the overall differences in total customers, revenue, and spending across segments were relatively small, suggesting that sales perfomance was fairly balanced among Loyal, New, VIP, and Returning customers. This indicates that the business does not rely heavily on a single customer segment for revenue generation
+
 #### d) Spending Behavior
+``Business Question`` : How do customer spending patterns differ across sales size categories?
 ```sql
 SELECT 
 	sales_size, 
-	COUNT(*) AS transaction_id, 
+	COUNT(*) AS total_transaction, 
 	SUM(net_sales) AS total_sales
 FROM retailsales.vw_retail_sales
 GROUP BY sales_size
 ORDER BY total_sales DESC;
 ```
+``Insight`` : Medium-sized transactions generated the highest transaction volume, indicating that most customer purchases fall within the medium spending category. However, Large transactions contributed the highest total revenue despite having a significantly lower transaction count, suggesting that higher-value purchases play a major role in overall sales performance. In contrast, Small transactions contributed the lowest revenue contribution among all sales size categories.
 
 ### 4. Regional, Channel, and Payment Method
 ``purpose`` : to understanding Region and channel perfomance 
